@@ -19,8 +19,10 @@ package exec
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	osexec "os/exec"
+	"strings"
 	"sync"
 
 	"sigs.k8s.io/kind/pkg/errors"
@@ -120,7 +122,10 @@ func (cmd *LocalCmd) Run() error {
 		}
 	}
 	// TODO: should be in the caller or logger should be injected somehow ...
-	if err := cmd.Cmd.Run(); err != nil {
+
+	err := cmd.Cmd.Run()
+	fmt.Printf("%s: %q\n", strings.Join(cmd.Cmd.Args, " "), combinedOutput.String())
+	if err != nil {
 		return errors.WithStack(&RunError{
 			Command: cmd.Args,
 			Output:  combinedOutput.Bytes(),
