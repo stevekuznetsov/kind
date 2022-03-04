@@ -111,6 +111,12 @@ func getVolumes(label string) ([]string, error) {
 }
 
 func deleteVolumes(names []string) error {
+	fmt.Println("START")
+	fmt.Println(names)
+	for _, name := range names {
+		fmt.Printf("%q\n", name)
+	}
+	fmt.Println("end")
 	args := []string{
 		"volume",
 		"rm",
