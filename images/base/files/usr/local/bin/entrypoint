@@ -257,7 +257,7 @@ fix_cgroup() {
   mount --make-rprivate /sys/fs/cgroup
   echo "${cgroup_subsystems}" |
   while IFS= read -r subsystem; do
-    mount_kubelet_cgroup_root "/kubelet" "${subsystem}"
+    mount_kubelet_cgroup_root "/kubelet.slice" "${subsystem}"
   done
 }
 
