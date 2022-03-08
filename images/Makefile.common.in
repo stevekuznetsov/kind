@@ -16,8 +16,8 @@ export DOCKER_CLI_EXPERIMENTAL=enabled
 PLATFORMS?=linux/amd64,linux/arm64,linux/s390x
 OUTPUT=
 PROGRESS=auto
-build: ensure-buildx
-	docker buildx build --platform=${PLATFORMS} $(OUTPUT) --progress=$(PROGRESS) -t ${IMAGE} --pull .
+build:
+	docker build --platform=${PLATFORMS} $(OUTPUT) --progress=$(PROGRESS) -t ${IMAGE} --pull .
 
 # push the cross built image
 push: OUTPUT=--push
